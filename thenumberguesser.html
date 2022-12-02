@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./thenumberguesser.css">
+    <title>The Number Guesser</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>The number guesser</h1>
+        <div class="headline">
+            <p>We have selected a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll
+                tell you if your guess was too high or too low.</p>
+        </div>
+        <label for="guessfield"> Enter a Number:</label>
+        <input type="text" id="guessfield" class="guessfield">
+        <input type="button" value="Submit" class="submitbutton">
+        <div class="result">
+            <p class="guesses"></p>
+            <p class="lastresult"></p>
+            <p class="loworhi"></p>
+        </div>
+    </div>
+    <script>
+        let randomnumber = Math.floor(Math.random() * 100) + 1;
+        const guesses = document.querySelector('.guesses');
+        const lastresult = document.querySelector('.lastresult');
+        const loworhi = document.querySelector('.loworhi');
+        const guessfield = document.querySelector('.guessfield');
+        const submitbutton = document.querySelector('.submitbutton');
+        //everyting yo mathi ma display garaunu parne ho so surumai ini haruko refrence banayera rakheko
+        let guesscount = 1;
+        let resetButton;
+        guessfield.focus();
+        function checkguess() {
+            let myEnteredNumber = Number(guessfield.value);
+            if (guesscount === 1) {
+                guesses.style.color = 'blue';
+                guesses.textContent = 'Prevoius Guesses: '
+            }
+            guesses.textContent += myEnteredNumber + ' ';
+
+            if (myEnteredNumber === randomnumber) {
+                lastresult.textContent = "Congratulations!!! You guessed it right."
+                lastresult.style.backgroundColor = 'green';
+                lastresult.style.color = 'white';
+                loworhi.textContent = '';   //
+                SetGameOver();
+            }
+
+            if (guesscount === 10) {
+                lastresult.textContent = '!!!GAME OVER!!!';
+                lastresult.style.backgroundColor = 'red';
+                lastresult.style.color = 'white';
+                SetGameOver();
+            }
+
+            else if (myEnteredNumber !== randomnumber) {
+                lastresult.textContent = 'WRONG';
+                lastresult.style.color = 'white';
+                lastresult.style.backgroundColor = 'red';
+
+                if (myEnteredNumber > randomnumber) {
+                    loworhi.textContent = 'Your Number was too high!';
+                    loworhi.style.color = 'blue';
+                }
+                if (myEnteredNumber < randomnumber) {
+                    loworhi.textContent = 'Your number was too low!';
+                    loworhi.style.color = 'blue';
+                }
+            }
+            guesscount++;
+            guessfield.value = '';
+            guessfield.focus();
+        }
+        submitbutton.addEventListener('click', checkguess);
+        function SetGameOver() {
+            resetButton = document.createElement('button');
+            resetButton.textContent = 'Start Game Over!';
+            resetButton.style.color = 'white';
+            resetButton.style.backgroundColor = 'rgb(147, 66, 223)';
+            resetButton.style.padding = '.5rem';
+            resetButton.style.border = 'none';
+            resetButton.style.fontWeight = 'bold';
+            resetButton.style.position = 'relative';
+            resetButton.style.top = '50%';
+            resetButton.style.left = '50%';
+            resetButton.style.transform = 'translate(-50%,-28%)';
+            resetButton.style.zIndex = '100';
+            guessfield.disabled = true;
+            submitbutton.disabled = true;
+            document.body.append(resetButton);
+            resetButton.addEventListener('click', resetGame);
+        }
+        function resetGame() {
+            guessfield.disabled = false;
+            submitbutton.disabled = false;
+            guesscount = 1;
+            const results = document.querySelectorAll('.result p')
+            for (let i = 0; i < results.length; i++) {
+                results[i].textContent = '';
+            }
+            lastresult.style.backgroundColor = 'white';
+            resetButton.parentNode.removeChild(resetButton);
+            guessfield.focus();
+            randomnumber = Math.floor(Math.random() * 100) + 1;
+        }
+    </script>
+
+</body>
+
+</html>

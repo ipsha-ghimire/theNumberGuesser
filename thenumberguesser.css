@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap');
+
+body::before,body::after{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    
+}
+.container{
+    display: flex;
+   flex-wrap: wrap;
+   width:100%;
+   /* border: 3px solid black; */
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   font-family: 'Otomanopee One', cursive;
+}
+.headline{
+    max-width: 60%;
+    text-align: center;
+    font-size: 1.14rem;
+}
+.headline p{
+    color: rgb(96, 37, 151);
+   
+}
+.container h1{
+    text-transform: capitalize;
+    color: rgb(99, 40, 155);
+    text-shadow: 5px 5px 4px rgb(205, 205, 212);
+    font-size: 2.5rem;
+}
+.container label{
+    color: red;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: .23rem;
+    text-shadow: 1px 1px 3px rgb(205, 205, 212);
+}
+.guessfield{
+    padding-right: 3.67rem;
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    margin-top: .27rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: blue;
+}
+.submitbutton{
+    padding: .56rem 1.5rem;
+    margin-top: .35rem;
+    border: none;
+    background-color: rgb(147, 66, 223);
+    color: aliceblue;
+    font-weight: bold;
+    border-top-left-radius:10px ;
+    border-bottom-right-radius:10px ;
+    box-shadow: 3px 4px 6px rgb(159, 159, 226);
+}
+@media (max-width: 481px){
+    .container h1{
+        text-align: center;
+    }
+}
